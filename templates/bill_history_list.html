@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+    td, th {
+        border: 1px solid black;
+        width: 250px;
+    }
+    .red_text {
+        color: red;
+    }
+</style>
+<h2>Bill History</h2>
+    {% for customer, job_list in bill_history_dct.items() %}
+
+        <table>
+        <tr>
+            <th>Customer ID</th>
+            <th>FirstName</th>
+            <th>FamilyName</th>
+            <th>Email</th>
+            <th>Phone</th>
+        </tr>
+        <tr>
+            {% for field in customer %}
+                <td>{{field}}</td>
+            {% endfor %}
+        </table>
+
+        <!-- code to display list of jobs-->
+        <table>
+            <tr>
+                <th>Job ID</th>
+                <th>Date</th>
+                <th>TotalCost</th>
+                <th>Completed</th>
+                <th>Paid</th>
+            </tr>
+            {% for job in job_list %}
+                {% if job[5] %}
+                    <tr>
+                        <td class="red_text">{{ job[0] }}</td>
+                        <td class="red_text">{{ job[1] }}</td>
+                        <td class="red_text">{{ job[2] }}</td>
+                        <td class="red_text">{{ job[3] }}</td>
+                        <td class="red_text">{{ job[4] }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td>{{ job[0] }}</td>
+                        <td>{{ job[1] }}</td>
+                        <td>{{ job[2] }}</td>
+                        <td>{{ job[2] }}</td>
+                        <td>{{ job[4] }}</td>
+                {%  endif %}
+            {% endfor %}
+        </table>
+
+        <div style="margin-top: 30px"></div>
+
+    {% endfor %}
+{% endblock %}

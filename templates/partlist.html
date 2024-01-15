@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+    td, th {
+        border: 1px solid black;
+    }
+</style>
+<h2>Part List</h2>
+
+    <!-- code to display list of service-->
+    <table>
+        <tr>
+            <th>Part ID</th>
+            <th>Part Name</th>
+            <th>Cost</th>
+        </tr>
+        {% for part in part_list %}
+        <tr>
+            <td>{{ part[0] }}</td>
+            <td>{{ part[1] }}</td>
+            <td>{{ part[2] }}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+    <!-- code to add service-->
+    <h2>Add Part</h2>
+    <form action="/part/add" method="post">
+        <label for="part_name">Part Name:</label><br>
+        <input type="text" id="part_name" name="part_name"><br>
+        <label for="cost">Cost:</label><br>
+        <input type="text" id="cost" name="cost"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+
+{% endblock %}

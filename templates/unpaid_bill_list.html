@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+    td, th {
+        border: 1px solid black;
+    }
+</style>
+
+    <h2>Search Unpaid Bills List By Customer</h2>
+    <!-- code to search unpaid job by customer-->
+    <form action="/unpaid/search" method="post">
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="search">
+        <input type="submit" value="Submit">
+    </form>
+
+<h2>Unpaid Bills List</h2>
+<!-- code to display unpaid list of jobs-->
+<table>
+    <tr>
+        <th>Customer ID</th>
+        <th>FirstName ID</th>
+        <th>FamilyName</th>
+        <th>Job ID</th>
+        <th>Job Date</th>
+        <th>Total Cost</th>
+        <th>Completed</th>
+        <th>Change Status</th>
+    </tr>
+    {% for unpaid_job in unpaid_bill_list %}
+        <tr>
+            <td>{{ unpaid_job[0] }}</td>
+            <td>{{ unpaid_job[1] }}</td>
+            <td>{{ unpaid_job[2] }}</td>
+            <td>{{ unpaid_job[3] }}</td>
+            <td>{{ unpaid_job[4] }}</td>
+            <td>{{ unpaid_job[5] }}</td>
+            <td>{{ unpaid_job[6] }}</td>
+            <td><a href="/unpaid/update/{{ unpaid_job[3] }}">Has Paid</a></td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

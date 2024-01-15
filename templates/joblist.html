@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+    td, th {
+        border: 1px solid black;
+    }
+</style>
+<h2>Curent Job List</h2>
+
+<!-- code to display list of jobs-->
+<table>
+    <tr>
+        <th>Job ID</th>
+        <th>job Date</th>
+        <th>Customer</th>
+        <th>Total Cost</th>
+        <th>Completed</th>
+        <th>Paid</th>
+    </tr>
+    {% for job in job_list %}
+        <tr>
+            <td>{{ job[0] }}</td>
+            <td>{{ job[1] }}</td>
+            <td>{{ job[2] }}</td>
+            <td>{{ job[3] }}</td>
+            <td>{{ job[4] }}</td>
+            <td>{{ job[5] }}</td>
+        </tr>
+    {% endfor %}
+</table>
+
+    <!-- code to add service-->
+    <h2 style="margin-top: 30px">Add Job</h2>
+    <form action="/job/add" method="post">
+        <label for="job_date">Job Date:</label><br>
+        <input type="date" id="job_date" name="job_date" required min="{{ min_date }}"><br>
+        <label for="customer">Customer:</label><br>
+        <select name="customer" id="customer">
+            {% for customer in customers %}
+                <option value="{{ customer[0] }}">{{ customer[1] }}</option>
+            {% endfor %}
+        </select><br><br>
+    <input type="submit" value="Submit">
+    </form>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    div {
+      display: flex;
+      flex-direction: column;
+    }
+    select {
+        width: 100px;
+        height: 30px;
+        margin-bottom: 10px;
+    }
+    input {
+        width: 100px;
+        height: 30px;
+        margin-bottom: 10px;
+    }
+</style>
+<h2>Job: {{ job[0] }}</h2>
+
+<!-- code to change the job status -->
+<form action="/job/{{ job.job_id }}" method="post">
+    <div>
+        <label for="completed">Completed</label>
+        <select name="completed" id="completed">
+            <option value="0" {% if job.completed == 0 %}selected{% endif %}>0</option>
+            <option value="1" {% if job.completed == 1 %}selected{% endif %}>1</option>
+        </select>
+    </div>
+    <div>
+        <h3>Service</h3>
+        {% for service_id in serviceId2Name %}
+            <label for="{{ service_id }}">{{ serviceId2Name[service_id] }}</label>
+            <input type="number" name="service_{{ service_id }}" id="{{ service_id }}" value="{{ serviceId2Qty[service_id] }}" min="0">
+        {% endfor %}
+        <h3>Part</h3>
+        {% for part_id in partId2Name %}
+            <label for="{{ part_id }}">{{ partId2Name[part_id] }}</label>
+            <input type="number" name="part_{{ part_id }}" id="{{ part_id }}" value="{{ partId2Qty[part_id] }}" min="0">
+        {% endfor %}
+    </div>
+    <div>
+        <input type="submit" value="Update">
+    </div>
+</form>
+
+
+{% endblock %}

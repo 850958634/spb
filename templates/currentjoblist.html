@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+    td, th {
+        border: 1px solid black;
+    }
+</style>
+<h2>Curent Job List</h2>
+
+<!-- code to display list of jobs-->
+<table>
+    <tr>
+        <th>Job ID</th>
+        <th>Customer ID</th>
+        <th>FamilyName</th>
+        <th>Date</th>
+        <th>Editable</th>
+    </tr>
+    {% for job in job_list %}
+        <tr>
+            {% for field in job %}
+                <td>{{field}}</td>
+            {% endfor %}
+            <td><a href="/job/{{job[0]}}">Edit</a></td>
+        </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

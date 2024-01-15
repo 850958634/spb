@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+    td, th {
+        border: 1px solid black;
+    }
+</style>
+<h2 style="margin-top: 10px">Customer List</h2>
+    <!-- code to search customers -->
+    <form action="/customer/search" method="post">
+        <label for="search">Search:</label>
+        <input type="text" id="search" name="search">
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- code to display list of customers -->
+    <table>
+        <tr>
+            <th>Customer ID</th>
+            <th>First Name</th>
+            <th>FamilyName</th>
+            <th>Date</th>
+            <th>Phone</th>
+        </tr>
+        {% for customer in customer_list %}
+            <tr>
+                <td>{{ customer[0] }}</td>
+                <td>{{ customer[1] }}</td>
+                <td>{{ customer[2] }}</td>
+                <td>{{ customer[3] }}</td>
+                <td>{{ customer[4] }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <!-- code to add customer -->
+    <h2 style="margin-top: 10px">Add Customer</h2>
+    <form action="/customer/add" method="post">
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name">
+        <label for="family_name" style="margin-left: 10px">Family Name:</label>
+        <input type="text" id="family_name" name="family_name">
+        <label for="email" style="margin-left: 10px">Email:</label>
+        <input type="text" id="email" name="email">
+        <label for="phone" style="margin-left: 10px">Phone:</label>
+        <input type="text" id="phone" name="phone">
+        <input type="submit" value="Submit">
+    </form>
+
+    <!-- code to other actions -->
+    <h2 style="margin-top: 30px;text-align: center">Other Actions</h2>
+    <div style="text-align: center">
+        <a href="/service/list">Service List</a>
+        <a href="/part/list" style="margin-left: 20px">Part List</a>
+        <a href="/job/list" style="margin-left: 20px">Schedule Job</a>
+        <a href="/unpaid_bill/list" style="margin-left: 20px">Unpaid Bill List</a>
+        <a href="/bill_history/list" style="margin-left: 20px">Bill History List</a>
+    </div>
+
+{% endblock %}
